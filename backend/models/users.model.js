@@ -1,8 +1,8 @@
-const mongoose = requiere('mongoose');
+const mongoose = require('mongoose');
 const users_schema = new mongoose.Schema ({
 
-    id: {
-        type: number,
+    idusers: {
+        type: Number,
         required: true,
         min: 1
     },

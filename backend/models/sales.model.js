@@ -2,7 +2,7 @@ const mongoose = require ('mongoose');
 
 const sales_schema = new mongoose.Schema ({
 
-    id: {
+    idsales: {
         type: String,
         required: true,
         min: 1
@@ -21,19 +21,19 @@ const sales_schema = new mongoose.Schema ({
         type: Number,
         required: true
     },
-    client:{
-        type: Schema.Types.ObjectId,
-        ref : "client"
-    },
+    // users:{
+    //     type: Schema.Types.ObjectId,
+    //     ref : "users"
+    // },
     state:{
-        type: string,
+        type: String,
         required : true
     },    
 
     product : [{
         producto:{
-            type: Schema.Types.ObjectId,
-            ref : "product"
+            // type: Schema.Types.ObjectId,
+            // ref : "product"
         },
     }]
 });
