@@ -10,6 +10,15 @@ getAllProducts = (req, res)=> {
     });
 }
 
+addProduct = (req, res) => {
+    const product_new = new product_model(req.body);
+    product_new.save((error, product) => {
+        if(error) return res.status(500).json({error: true, mensaje:error});
+        res.json({mensaje:req.body.description + " agregado satisfactoriamente"})
+    })
+}
+
 module.exports =Object.freeze({
-    getAllProducts
+    getAllProducts,
+    addProduct
 })

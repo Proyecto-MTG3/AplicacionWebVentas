@@ -21,17 +21,19 @@ const sales_schema = new mongoose.Schema ({
         type: Number,
         required: true
     },
-    // users:{
-    //     type: Schema.Types.ObjectId,
-    //     ref : "users"
-    // },
+    users:{
+        nombre: String,
+        Idusers: Number,
+        tipousers:String
+     },
+
     state:{
         type: String,
         required : true
     },    
 
     product : [{
-        producto:{
+        product:{
             // type: Schema.Types.ObjectId,
             // ref : "product"
         },
