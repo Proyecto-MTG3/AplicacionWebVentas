@@ -4,7 +4,7 @@ const {sales_middleware} = require('../middlewares');
 
 router.post('/add',sales_middleware.verifyTypes, sales_middleware.verifyidSales, sales_controller.addSales);
 router.get('/list',sales_controller.getAllSales); 
-//router.put('/update',sales_middleware.verifyTypes, sales_controller.updateSales); 
+router.put('/update',sales_middleware.verifyTypes, sales_controller.updateSales); 
 router.delete('/delete/:id',sales_controller.deleteSales); 
 
 

@@ -16,13 +16,13 @@ verifyTypes = (req, res, next) => {
     //vamos hacer las validaciones
     const{error} = users_joi.validate(req.body)
     if(error) return res.status(400).json({error:true, mensaje:error.details[0].message})
-    next
+    next ();
 }
 
 verifyidUsers = (req, res, next) => {
     users_model.findOne({idUsers:req.body.idUsers}).exec((error, users) => {
         if(error) return res.status(500).json({error:true, mensaje: error})
-        if(users) return res.status(400).json({error:true, mensaje: users.idUsers + "se encuentra registrado " + users.idUsers});
+        if(users) return res.status(400).json({error:true, mensaje: users.nombre + "se encuentra registrado identificado con el numero " + users.idUsers});
         next ();
     });
 }

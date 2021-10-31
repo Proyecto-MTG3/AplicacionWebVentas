@@ -29,8 +29,19 @@ deleteProduct = async (req, res) => {
     }
 }
 
+updateProduct = async (req, res) =>{
+    try{
+        const product_update = await product_model.findByIdAndUpdate({_id: req.body._id}, req.body, {useFindAndModify:false});
+        if (product_update) return res.json({mensaje: "Producto actualizado correctamente"});
+        else return res.status(400).json({error: true, mensaje: "Falla al actualizar"})
+    }catch(error){
+        if(error) return res.status(500).json({eroor: true, mensaje: error});
+    }
+}
 module.exports =Object.freeze({
     getAllProducts,
     addProduct,
-    deleteProduct
+    deleteProduct,
+    updateProduct
+
 })

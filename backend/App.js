@@ -28,7 +28,7 @@ const{users_routes} = require ('./routers');
 //uso de las rutas
 app.use('/api/v1/product',product_routes);
 app.use('/api/v1/sales',sales_routes);
-app.use('/api/v1/users',users_routes);
+app.use('/api/v1/users/',users_routes);
 
 
 

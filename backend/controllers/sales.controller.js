@@ -22,15 +22,26 @@ deleteSales = async (req, res) => {
     const sales_delete = await sales_model.findByIdAndDelete({_id: req.params.id})
 
     try{
-        if(sales_delete) return  res.json({mensaje: sales_delete.idSales + " eliminada correctamente"})
+        if(sales_delete) return  res.json({mensaje:"factura "+ sales_delete.idSales + " eliminada correctamente"})
         else return res.status(500).json({error: true, mensaje: "Falla al eliminar"});
     }catch (error){
         return res.status(500).json({error: true, mensaje: error})
     }
 }
 
+updateSales = async (req, res) =>{
+    try{
+        const sales_update = await sales_model.findByIdAndUpdate({_id: req.body._id}, req.body, {useFindAndModify:false});
+        if (sales_update) return res.json({mensaje: "Registro actualizado correctamente"});
+        else return res.status(400).json({error: true, mensaje: "Falla al actualizar"})
+    }catch(error){
+        if(error) return res.status(500).json({eroor: true, mensaje: error});
+    }
+}
+
 module.exports =Object.freeze({
     getAllSales,
     addSales,
-    deleteSales
+    deleteSales,
+    updateSales
 })

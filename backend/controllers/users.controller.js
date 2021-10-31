@@ -30,8 +30,19 @@ deleteUsers = async (req, res) => {
     }
 }
 
+updateUsers = async (req, res) =>{
+    try{
+        const users_update = await users_model.findByIdAndUpdate({_id: req.body._id}, req.body, {useFindAndModify:false});
+        if (users_update) return res.json({mensaje: "Usuario actualizado correctamente"});
+        else return res.status(400).json({error: true, mensaje: "Falla al actualizar"})
+    }catch(error){
+        if(error) return res.status(500).json({error: true, mensaje: error});
+    }
+}
+
 module.exports =Object.freeze({
     getAllUsers,
     addUsers,
-    deleteUsers
+    deleteUsers,
+    updateUsers
 })

@@ -26,7 +26,7 @@ verifyTypes = (req, res, next) =>{
 verifyidSales = (req, res, next) => {
     sales_model.findOne({idSales:req.body.idSales}).exec((error, sales) => {
         if(error) return res.status(500).json({error:true, mensaje: error})
-        if(sales) return res.status(400).json({error:true, mensaje:"factura " +  sales.idSales + " esta registrada " + sales.idSales});
+        if(sales) return res.status(400).json({error:true, mensaje:"factura " +  sales.idSales + " esta registrada "});
         next ();   
     });
 }   
