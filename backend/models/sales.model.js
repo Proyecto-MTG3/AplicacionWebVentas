@@ -2,7 +2,7 @@ const mongoose = require ('mongoose');
 
 const sales_schema = new mongoose.Schema ({
 
-    idsales: {
+    idSales: {
         type: String,
         required: true,
         min: 1
@@ -11,33 +11,49 @@ const sales_schema = new mongoose.Schema ({
         type: Date,
         default: Date.now
     },
+    idProduct: {
+        type: String,
+        required: true,
+        min: 1
+    },
+    description:{
+        type: String,
+        required: true,
+        min: 1       
+    },        
     cantidad:{
         type: Number,
         required :true,
         min: 1
     },
-
+    unit_cost:{
+        type: Number,
+        required: true,
+    },
     total_cost: {
         type: Number,
         required: true
     },
-    users:{
-        nombre: String,
-        Idusers: Number,
-        tipousers:String
-     },
-
+     idUsers: {
+        type: Number,
+        required: true,
+        min: 1
+    },
+    nombreCliente: {
+        type: String,
+        required: true,
+        min: 1
+    },
+    nombreVendedor: {
+        type: String,
+        required: true,
+        min: 1
+    },         
     state:{
         type: String,
         required : true
     },    
 
-    product : [{
-        product:{
-            // type: Schema.Types.ObjectId,
-            // ref : "product"
-        },
-    }]
 });
 
 module.exports = mongoose.model('sales',sales_schema);

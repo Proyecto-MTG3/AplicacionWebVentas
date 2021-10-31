@@ -18,7 +18,19 @@ addProduct = (req, res) => {
     })
 }
 
+deleteProduct = async (req, res) => {
+    const product_delete = await product_model.findByIdAndDelete({_id: req.params.id})
+
+    try{
+        if(product_delete) return  res.json({mensaje: product_delete.description + " eliminado correctamente"})
+        else return res.status(500).json({error: true, mensaje: "Falla al eliminar"});
+    }catch (error){
+        return res.status(500).json({error: true, mensaje: error})
+    }
+}
+
 module.exports =Object.freeze({
     getAllProducts,
-    addProduct
+    addProduct,
+    deleteProduct
 })

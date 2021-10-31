@@ -19,7 +19,19 @@ addUsers = (req, res) => {
     })
 }
 
+deleteUsers = async (req, res) => {
+    const users_delete = await users_model.findByIdAndDelete({_id: req.params.id})
+
+    try{
+        if(users_delete) return  res.json({mensaje: users_delete.nombre + " eliminado correctamente"})
+        else return res.status(500).json({error: true, mensaje: "Falla al eliminar"});
+    }catch (error){
+        return res.status(500).json({error: true, mensaje: error})
+    }
+}
+
 module.exports =Object.freeze({
     getAllUsers,
-    addUsers
+    addUsers,
+    deleteUsers
 })

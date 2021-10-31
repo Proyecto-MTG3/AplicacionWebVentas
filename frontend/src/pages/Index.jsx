@@ -1,5 +1,6 @@
 import React from "react";
 import 'styles/styles.css';
+import Google from '../img/googleLogo.png';
 import {Link} from "react-router-dom";
 import AuthLayout from "layouts/AuthLayout";
 import 'react-bootstrap';
@@ -41,16 +42,18 @@ function Index() {
                           <Link className="small" to="aut/Password">¿Olvidó su contraseña?</Link>
                           <button className="btn btn-primary">
                             <Link to="/Index" type="submit"/>Ingresar
-                          </button>
-                          <button className="btn btn-primary">
-                            <Link to="/Index" type="submit"/>Ingresar con google
-                          </button>                          
-                        </div>
+                          </button>                        
+                        </div>                       
                       </form>
                     </div>
                     <div className="card-footer text-center py-3">
                       <div className="small"><Link to="aut/Register">Crear una nueva cuenta</Link></div>
                     </div>
+                      <div className="card-footer text-center py-3 d-grid gap-2">                       
+                        <button className="btn btn-" type="button">
+                        <img src={Google} alt='Logo Google' className='small' />
+                            <span className='mx-4'>Continúa con Google</span></button>                           
+                      </div>                                
                   </div>
                 </div>
               </div>

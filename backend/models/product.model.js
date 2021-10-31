@@ -2,8 +2,8 @@
 const mongoose = require('mongoose');
 // describimos el modelo producto y lo exportamos
 const product_schema = new mongoose.Schema ({
-    id: {
-        type: String,
+    idProduct: {
+        type: Number,
         required: true,
         min: 1
     },
