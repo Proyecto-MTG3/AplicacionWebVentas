@@ -13,10 +13,6 @@ import Axios from 'axios';
 
 function MaestroProductos() {
 
-    const [idProduct_add, set_idProduct_add] = useState(0);
-    const [description_add, set_description_add] = useState("");
-    const [unit_cost_add, set_unit_cost_add] = useState(0);
-    const [state_add, set_state_add] = useState("true");
 
     const [idProduct_update, set_idProduct_update] = useState(0);
     const [description_update, set_description_update] = useState("");
@@ -34,15 +30,6 @@ function MaestroProductos() {
     }, [])
 
 
-    const add_product_db = () => {
-        console.log(idProduct_add + description_add + unit_cost_add + state_add)
-        Axios.post('http://localhost:3001/api/v1/product/add', {
-            idProduct: idProduct_add,
-            description: description_add,
-            unit_cost: unit_cost_add,
-            state: state_add
-        });
-    }
 
     const delete_product = (_id) => {
         Axios.delete('http://localhost:3001/api/v1/product/delete/' + _id)
@@ -80,64 +67,6 @@ function MaestroProductos() {
                                         Productos
                                     </div>
                                     <div className="card-body">
-                                        <div>
-                                            <button onClick={add_product_db} class="btn btn-success" >Agregar Producto</button>
-                                        </div>
-                                        <table id="datatablesSimple">
-                                            <thead>
-                                                <tr>
-                                                    <th>Codigo Producto</th>
-                                                    <th>Descripción</th>
-                                                    <th>Valor unitario</th>
-                                                    <th>Estado</th>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <input className="dataTable-input" type="number"  onChange={(e) => {
-                                                            set_idProduct_add(e.target.value);
-                                                        }
-                                                        } />
-                                                    </td>
-                                                    <td>
-                                                        <input className="dataTable-input" type="text"  onChange={(e) => {
-                                                            set_description_add(e.target.value);
-                                                        }
-                                                        } />
-                                                    </td>
-                                                    <td>
-                                                        <input className="dataTable-input" type="number"  onChange={(e) => {
-                                                            set_unit_cost_add(e.target.value);
-                                                        }
-                                                        } />
-                                                    </td>
-                                                    <td>
-                                                        <Form.Group className="mb-3" controlId="formBasicUnitCost">
-                                                            <Form.Check
-                                                                inline
-                                                                label="Disponible"
-                                                                name="estado"
-                                                                type="radio"
-                                                                id='1'
-                                                                onChange={(e) => {
-                                                                    set_state_add("true");
-                                                                }} />
-
-                                                            <Form.Check
-                                                                inline
-                                                                label="Agotado"
-                                                                name="estado"
-                                                                type="radio"
-                                                                id='0'
-                                                                onChange={(e) => {
-                                                                    set_state_add("false");
-                                                                }} />
-                                                        </Form.Group>
-                                                    </td>
-                                                </tr>
-                                            </thead>
-                                        </table>
-
                                         <hr />
                                         <Table striped bordered hover>
                                             <thead>
@@ -195,10 +124,10 @@ function MaestroProductos() {
                                                 }
                                             </tbody>
                                         </Table>
-                                       
+                                        <hr />
                                         <Form>
                                             <Row className="mb-3">    
-                                            <Form.Group  as ={Col} className="mb-2" controlId="formBasicidSales">
+                                            <Form.Group  as ={Col} className="mb-2" controlId="formBasicidProduct">
                                                 <Form.Label>Codigo Producto</Form.Label>
                                                 <Form.Control disable='true' id='idProduct_update' type="number"  onChange={
                                                     (e) => {
@@ -224,7 +153,7 @@ function MaestroProductos() {
                                                 } />
                                             </Form.Group>
 
-                                            <Form.Group className="mb-3" controlId="formBasicUnitCost2">
+                                            <Form.Group className="mb-3" controlId="formBasicState">
                                                 <Form.Check
                                                     inline
                                                     label="Disponible"
@@ -246,10 +175,7 @@ function MaestroProductos() {
                                                     }} />
                                             </Form.Group>
 
-                                            <Button variant="warning" onClick={
-                                                () => {
-                                                    update_product(id_update)
-                                                }} >
+                                            <Button variant="warning" onClick={() => {update_product(id_update)}}>
                                                 Actualizar
                                             </Button>
                                         </Form>

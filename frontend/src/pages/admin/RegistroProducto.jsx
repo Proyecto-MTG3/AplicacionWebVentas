@@ -111,7 +111,7 @@ const RegistroProducto = () => {
                                     <br></br>                  
                                     <center>
                                         <div>
-                                            <button onclick="clear" class="btn btn-danger">CANCELAR</button>
+                                            <button onClick='clear' class="btn btn-danger">CANCELAR</button>
                                             <button onClick = {add_product_db} class="btn btn-success">AGREGAR</button>
 
 

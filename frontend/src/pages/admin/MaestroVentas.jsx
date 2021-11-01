@@ -14,17 +14,7 @@ import Axios from 'axios';
 const MaestroVentas = () => {
 
 
-    const [idSales_add, set_idSales_add] = useState(0);
-    const [idProduct_add, set_idProduct_add] = useState(0);
-    const [description_add, set_description_add] = useState("");
-    const [cantidad_add, set_cantidad_add] = useState(0);
-    const [unit_cost_add, set_unit_cost_add] = useState(0);
-    const [total_cost_add, set_total_cost_add] = useState(0);
-    const [fecha_add, set_fecha_add] = useState(Date);
-    const [idUsers_add, set_idUsers_add] = useState(0);
-    const [nombreCliente_add, set_nombreCliente_add] = useState("");
-    const [nombreVendedor_add, set_nombreVendedor_add] = useState("");
-    const [state_add, set_state_add] = useState("true");
+
 
     const [idSales_update, set_idSales_update] = useState(0);
     const [idProduct_update, set_idProduct_update] = useState(0);
@@ -32,11 +22,11 @@ const MaestroVentas = () => {
     const [cantidad_update, set_cantidad_update] = useState(0);
     const [unit_cost_update, set_unit_cost_update] = useState(0);
     const [total_cost_update, set_total_cost_update] = useState(0);
-    const [fecha_update, set_fecha_update] = useState(Date);
+    const [fecha_update, set_fecha_update] = useState(0);
     const [idUsers_update, set_idUsers_update] = useState(0);
     const [nombreCliente_update, set_nombreCliente_update] = useState("");
     const [nombreVendedor_update, set_nombreVendedor_update] = useState("");
-    const [state_update, set_state_update] = useState("true");
+    const [state_update, set_state_update] = useState("Entregado");
     const [id_update, set_id_update] = useState(0);
 
     const [sales, set_sales] = useState([])
@@ -49,22 +39,6 @@ const MaestroVentas = () => {
     }, [])
 
 
-    const add_sales_db = () => {
-        console.log(idSales_add + idProduct_add + description_add + cantidad_add + unit_cost_add + total_cost_add + fecha_add + idUsers_add + nombreCliente_add + nombreVendedor_add + state_add)
-        Axios.post('http://localhost:3001/api/v1/sales/add', {
-            idSales: idSales_add,
-            idProduct: idProduct_add,
-            description: description_add,
-            cantidad: cantidad_add,
-            unit_cost: unit_cost_add,
-            total_cost: total_cost_add,
-            fecha: fecha_add,
-            idUsers: idUsers_add,
-            nombreCliente: nombreCliente_add,
-            nombreVendedor: nombreVendedor_add,
-            state: state_add
-        });
-    }
 
     const delete_sales = (_id) => {
         Axios.delete('http://localhost:3001/api/v1/sales/delete/' + _id)
@@ -113,95 +87,6 @@ const MaestroVentas = () => {
                                     Ventas
                                 </div>
                                 <div className="card-body">
-                                    <div>
-                                        <button onClick={add_sales_db} class="btn btn-success" >Agregar venta</button>
-                                    </div>
-
-                                    <table id="datatablesSimple">
-                                        <thead>
-                                            <tr>
-                                                <th>No Venta</th>
-                                                <th>Codigo Producto</th>
-                                                <th>Descripcion</th>
-                                                <th>Cantidad</th>
-                                                <th>Valor Unitario</th>
-                                                <th>Valor Total</th>
-                                                <th>Fecha Venta</th>
-                                                <th>Documento Cliente</th>
-                                                <th>Nombre Cliente</th>
-                                                <th>Vendedor</th>
-                                                <th>Estado</th>
-
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input className="dataTable-input" type="number" onChange={(e) => { set_idSales_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="number" onChange={(e) => { set_idProduct_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="text" onChange={(e) => { set_description_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="number" id="valor1" onChange={(e) => { set_cantidad_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="number" id="valor2" onChange={(e) => { set_unit_cost_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="number" onChange={(e) => { set_total_cost_add(e.target.value); }} />
-
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="date" onChange={(e) => { set_fecha_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="number" onChange={(e) => { set_idUsers_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="text" onChange={(e) => { set_nombreCliente_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <input className="dataTable-input" type="text" onChange={(e) => { set_nombreVendedor_add(e.target.value); }} />
-                                                </td>
-                                                <td>
-                                                    <Form.Group className="mb-3" controlId="formBasicUnitCost">
-                                                        <Form.Check
-                                                            inline
-                                                            label="En proceso"
-                                                            name="estado"
-                                                            type="radio"
-                                                            id='1'
-                                                            onChange={(e) => {
-                                                                set_state_add("true");
-                                                            }} />
-
-                                                        <Form.Check
-                                                            inline
-                                                            label="Entregado"
-                                                            name="estado"
-                                                            type="radio"
-                                                            id='0'
-                                                            onChange={(e) => {
-                                                                set_state_add("false");
-                                                            }} />
-
-                                                        <Form.Check
-                                                            inline
-                                                            label="Cancelado"
-                                                            name="estado"
-                                                            type="radio"
-                                                            id='0'
-                                                            onChange={(e) => {
-                                                                set_state_add("false");
-                                                            }} />
-                                                    </Form.Group>
-                                                </td>
-                                            </tr>
-
-                                        </thead>
-                                    </table>
                                     <hr />
                                     <Table striped bordered hover>
                                         <thead>
@@ -290,8 +175,6 @@ const MaestroVentas = () => {
                                                                     document.getElementById('nombreCliente_update').defaultValue = value.nombreCliente;
                                                                     document.getElementById('nombreVendedor_update').defaultValue = value.nombreVendedor;
 
-
-
                                                                 }}
                                                             >Editar
                                                             </Button>
@@ -309,7 +192,7 @@ const MaestroVentas = () => {
                                         <Row className="mb-3">
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicFecha">
                                                 <Form.Label>Fecha</Form.Label>
-                                                <Form.Control disable='true' id='fecha_update' type="date" onChange={
+                                                <Form.Control disable='true' id='fecha_update' type="" onChange={
                                                     (e) => {
                                                         set_fecha_update(e.target.value);
                                                     }} />
@@ -383,7 +266,7 @@ const MaestroVentas = () => {
                                             </Form.Group>
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicTotalCost">
                                                 <Form.Label>Costo Total</Form.Label>
-                                                <Form.Control id='total_cost_update' type="number" onChange={(e) => { set_total_cost_update(e.target.value); }} />
+                                                <Form.Control id='total_cost_update' type="number" onChange={(e) => {set_total_cost_update(e.target.value); }} />
                                                
                                             </Form.Group>
                                         </Row>
@@ -395,7 +278,7 @@ const MaestroVentas = () => {
                                                 type="radio"
                                                 id='1'
                                                 onChange={(e) => {
-                                                    set_state_update("true");
+                                                    set_state_update("En Proceso");
                                                 }} />
 
                                             <Form.Check
@@ -405,7 +288,7 @@ const MaestroVentas = () => {
                                                 type="radio"
                                                 id='0'
                                                 onChange={(e) => {
-                                                    set_state_update("false");
+                                                    set_state_update("Entregado");
                                                 }} />
                                             <Form.Check
                                                 inline
@@ -414,22 +297,14 @@ const MaestroVentas = () => {
                                                 type="radio"
                                                 id='0'
                                                 onChange={(e) => {
-                                                    set_state_update("false");
+                                                    set_state_update("Cancelado");
                                                 }} />                                               
                                         </Form.Group>
 
-
-                                        <Button variant="warning" onClick={
-                                            () => {
-                                                update_sales(id_update)
-                                            }} >
+                                        <Button variant="warning" onClick={() => {update_sales(id_update)}}>
                                             Actualizar
                                         </Button>
-
                                     </Form>
-
-
-
                                 </div>
                             </div>
                         </div>

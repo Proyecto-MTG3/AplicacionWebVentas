@@ -3,12 +3,48 @@ import Footer from 'components/Footer';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
 import 'react-bootstrap';
+import {Form} from 'react-bootstrap';
 import 'bootstrap';
 import 'styles/styles.css';
+import {useState} from 'react';
+import Axios from 'axios';
 
  
 
 const RegistroVentas = () => {
+
+    const [idSales_add, set_idSales_add] = useState(0);
+    const [idProduct_add, set_idProduct_add] = useState(0);
+    const [description_add, set_description_add] = useState("");
+    const [cantidad_add, set_cantidad_add] = useState(0);
+    const [unit_cost_add, set_unit_cost_add] = useState(0);
+    const [total_cost_add, set_total_cost_add] = useState(0);
+    const [fecha_add, set_fecha_add] = useState(Date);
+    const [idUsers_add, set_idUsers_add] = useState(0);
+    const [nombreCliente_add, set_nombreCliente_add] = useState("");
+    const [nombreVendedor_add, set_nombreVendedor_add] = useState("");
+    const [state_add, set_state_add] = useState("Entregao");
+
+
+    const add_sales_db = () => {
+        console.log(idSales_add + idProduct_add + description_add + cantidad_add + unit_cost_add + total_cost_add + fecha_add + idUsers_add + nombreCliente_add + nombreVendedor_add + state_add)
+        Axios.post('http://localhost:3001/api/v1/sales/add', {
+            idSales: idSales_add,
+            idProduct: idProduct_add,
+            description: description_add,
+            cantidad: cantidad_add,
+            unit_cost: unit_cost_add,
+            total_cost: total_cost_add,
+            fecha: fecha_add,
+            idUsers: idUsers_add,
+            nombreCliente: nombreCliente_add,
+            nombreVendedor: nombreVendedor_add,
+            state: state_add
+        });
+    }
+
+
+
     return (
 
     <div className="sb-nav-fixed">
@@ -42,11 +78,11 @@ const RegistroVentas = () => {
                                                 <div className="row">
                                                     <div className="col">
                                                     
-                                                    <input type="date" className="form-control" placeholder="Fecha" aria-label="Fecha"/>
+                                                    <input type="date" className="form-control" placeholder="Fecha" aria-label="Fecha" onChange={(e) => { set_fecha_add(e.target.value); }} />
                                                     </div>
                                                     <div class="col">
                                                         
-                                                    <input type="text" className="form-control" placeholder="Id Venta" aria-label="Id Venta"/>
+                                                    <input type="text" className="form-control" placeholder="Id Venta" aria-label="Id Venta" onChange={(e) => { set_idSales_add(e.target.value); }} />
                                                     </div>
                                                 </div>
                                              </div>   
@@ -70,16 +106,16 @@ const RegistroVentas = () => {
 
                                                     <tr>
                                                         <td>
-                                                            <input className="dataTable-input" type="text"/>
+                                                            <input className="dataTable-input" type="text" onChange={(e) => { set_idProduct_add(e.target.value); }} />
                                                         </td>
                                                         <td>
-                                                            <input className="dataTable-input" type="text"/>
+                                                            <input className="dataTable-input" type="text" onChange={(e) => { set_description_add(e.target.value); }} />
                                                         </td>                                            
                                                         <td>
-                                                            <input className="dataTable-input" type="number"/>
+                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_cantidad_add(e.target.value); }} />
                                                         </td>
                                                         <td>
-                                                            <input className="dataTable-input" type="number"/>
+                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_unit_cost_add(e.target.value); }} />
                                                         </td>                                            
                                                     </tr>
 
@@ -106,83 +142,56 @@ const RegistroVentas = () => {
                                                             TOTAL
                                                         </th>
                                                         <td>
-                                                            <input className="dataTable-input" type="number"/>
+                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_total_cost_add(e.target.value); }}/>
                                                         </td>                                            
-                                                    </tr>                                        
-                                                    
+                                                    </tr>                                                                                            
                                                 </tbody>                                                                       
                                             </table> 
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text"  id="basic-addon1">Documento Cliente</span>
-                                                <input type="number" className="form-control" placeholder="Documento" aria-label="Documento" aria-describedby="basic-addon1"/>                            <span class="input-group-text" id="basic-addon2">Nombre</span>
-                                                <input type="text" className="form-control" placeholder="Nombre Cliente" aria-label="Nombre Cliente" aria-describedby="basic-addon2"/>
-
-                                            </div>
-                                            
-                                            
+                                                <input type="number" className="form-control" placeholder="Documento" aria-label="Documento" aria-describedby="basic-addon1" onChange={(e) => { set_idUsers_add(e.target.value); }} />                            
+                                                <span class="input-group-text" id="basic-addon2">Nombre</span>
+                                                <input type="text" className="form-control" placeholder="Nombre Cliente" aria-label="Nombre Cliente" aria-describedby="basic-addon2" onChange={(e) => { set_nombreCliente_add(e.target.value); }} />
+                                            </div>                                           
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="basic-addon3">Vendedor</span>
-                                                <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+                                                <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={(e) => { set_nombreVendedor_add(e.target.value); }} />
                                             </div>
+                                                <td>
+                                                    <Form.Group className="mb-3" controlId="formBasicUnitCost">
+                                                        <Form.Check
+                                                            inline
+                                                            label="En proceso"
+                                                            name="estado"
+                                                            type="radio"
+                                                            id='1'
+                                                            onChange={(e) => {
+                                                                set_state_add("En Proceso");
+                                                            }} />
 
+                                                        <Form.Check
+                                                            inline
+                                                            label="Entregado"
+                                                            name="estado"
+                                                            type="radio"
+                                                            id='0'
+                                                            onChange={(e) => {
+                                                                set_state_add("Entregao");
+                                                            }} />
 
-                                            
-                                                <div className="form-check">
-                                                    <div className="input-group mb-3"></div>
-                                                    <span className="input-group-text" id="basic-addon3"> Estado  </span>
-                                                    <br></br>                                         
-                                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                                    <label className="form-check-label" htmlFor="flexRadioDefault1">  En proceso  </label>
-                                                </div>    
-                                                
-                                                
-                                                <div className="form-check">
-                                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-                                                    <label className="form-check-label" htmlFor="flexRadioDefault2">
-                                                    Entregada
-                                                    </label>
-                                                </div>
-                                                
-                                                <div className="form-check">
-                                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked/>
-                                                    <label className="form-check-label" htmlFor="flexRadioDefault3">
-                                                    Cancelada
-                                                    </label>
-                                                </div><br></br>   
-                                                
-                                                
-                                            
-                                            
-                                            <div><button onclick="agregarVentas()"  type="button" className="btn btn-success">Agregar Ventas</button></div>
-{/*                                             <center>       
-                                                    <script>
-                                                        function agregarVentas(evento) {
-                                                        
-                                                        alert("¡Registro creado con exito!")
-                                                        }
-                                                    </script>
-                                            </center> */}  
-                                                
-            
-                                                <div className="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                                                    <div className="modal-dialog">
-                                                    <div className="modal-content">
-                                                        <div className="modal-header">
-                                                        <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            <h3>Cabecera de la ventana</h3>
-                                                        </div>
-                                                        <div className="modal-body">
-                                                            <h4>Texto de la ventana</h4>
-                                                            Mas texto en la ventana.   
-                                                    </div>
-                                                        <div className="modal-footer">
-                                                        <div href="#" data-dismiss="modal" className="btn btn-danger">Cerrar</div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>                                   
-                                            
+                                                        <Form.Check
+                                                            inline
+                                                            label="Cancelado"
+                                                            name="estado"
+                                                            type="radio"
+                                                            id='0'
+                                                            onChange={(e) => {
+                                                                set_state_add("Cancelado");
+                                                            }} />
+                                                    </Form.Group>
+                                                </td>                                                                                           
+                                                                                             
+                                            <div><button  onClick={add_sales_db}  type="button" className="btn btn-success">Agregar Ventas</button></div>                                                                                                                             
                                         </div>
                                     </div>
                                 </div>
