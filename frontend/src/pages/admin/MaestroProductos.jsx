@@ -3,147 +3,266 @@ import Footer from 'components/Footer';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
 import 'styles/styles.css';
-import 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Button, Table,Col, Row } from 'react-bootstrap';
 import 'bootstrap';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 
 
-const MaestroProductos = () => {
+function MaestroProductos() {
+
+    const [idProduct_add, set_idProduct_add] = useState(0);
+    const [description_add, set_description_add] = useState("");
+    const [unit_cost_add, set_unit_cost_add] = useState(0);
+    const [state_add, set_state_add] = useState("true");
+
+    const [idProduct_update, set_idProduct_update] = useState(0);
+    const [description_update, set_description_update] = useState("");
+    const [unit_cost_update, set_unit_cost_update] = useState(0);
+    const [state_update, set_state_update] = useState("true");
+    const [id_update, set_id_update] = useState(0);
+
+    const [products, set_products] = useState([])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/v1/product/list').then((res) => {
+            console.log(res.data.products)
+            set_products(res.data.products)
+        });
+    }, [])
+
+
+    const add_product_db = () => {
+        console.log(idProduct_add + description_add + unit_cost_add + state_add)
+        Axios.post('http://localhost:3001/api/v1/product/add', {
+            idProduct: idProduct_add,
+            description: description_add,
+            unit_cost: unit_cost_add,
+            state: state_add
+        });
+    }
+
+    const delete_product = (_id) => {
+        Axios.delete('http://localhost:3001/api/v1/product/delete/' + _id)
+    }
+
+    const update_product = (_id) => {
+        Axios.put('http://localhost:3001/api/v1/product/update', {
+            _id: _id,
+            idProduct: idProduct_update,
+            description: description_update,
+            unit_cost: unit_cost_update,
+            state: state_update
+        })
+    }
+
+
     return (
         <div>
-        <div className="sb-nav-fixed">
-            <Navbar/>
-            <div id="layoutSidenav">
-                <Sidebar/>   
-                <div id="layoutSidenav_content">
+            <div className="sb-nav-fixed">
+                <Navbar />
+                <div id="layoutSidenav">
+                    <Sidebar />
+                    <div id="layoutSidenav_content">
                         <main>
                             <div className="container-fluid px-4">
-                                <h1 className="mt-4">Maestro productos</h1>
+                                <h1 className="mt-2">Maestro productos</h1>
                                 <ol className="breadcrumb mb-4">
                                     <li className="breadcrumb-item"><a href="index.html">Menu principal</a></li>
                                     <li className="breadcrumb-item active">Maestro productos</li>
                                 </ol>
-                                <div className="card mb-4">
-                                    <div className="card-body">
-                                        <p>En este módulo puede visualizar, buscar y actualizar los productos.</p>
-                                    </div>
-                                </div>
-                                <div className="card mb-4">
+
+                                <div className="card mb-2">
                                     <div className="card-header">
                                         <i className="fas fa-table me-1"></i>
                                         Productos
                                     </div>
                                     <div className="card-body">
                                         <div>
-                                            <button onclick="agregarLista()" class="btn btn-success">Agregar Producto</button>
-                                        </div>                                
+                                            <button onClick={add_product_db} class="btn btn-success" >Agregar Producto</button>
+                                        </div>
                                         <table id="datatablesSimple">
                                             <thead>
                                                 <tr>
-                                                    <th>Editar</th>
-                                                    <th>Identificador</th>
+                                                    <th>Codigo Producto</th>
                                                     <th>Descripción</th>
                                                     <th>Valor unitario</th>
                                                     <th>Estado</th>
                                                 </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <input className="dataTable-input" type="number"  onChange={(e) => {
+                                                            set_idProduct_add(e.target.value);
+                                                        }
+                                                        } />
+                                                    </td>
+                                                    <td>
+                                                        <input className="dataTable-input" type="text"  onChange={(e) => {
+                                                            set_description_add(e.target.value);
+                                                        }
+                                                        } />
+                                                    </td>
+                                                    <td>
+                                                        <input className="dataTable-input" type="number"  onChange={(e) => {
+                                                            set_unit_cost_add(e.target.value);
+                                                        }
+                                                        } />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Group className="mb-3" controlId="formBasicUnitCost">
+                                                            <Form.Check
+                                                                inline
+                                                                label="Disponible"
+                                                                name="estado"
+                                                                type="radio"
+                                                                id='1'
+                                                                onChange={(e) => {
+                                                                    set_state_add("true");
+                                                                }} />
+
+                                                            <Form.Check
+                                                                inline
+                                                                label="Agotado"
+                                                                name="estado"
+                                                                type="radio"
+                                                                id='0'
+                                                                onChange={(e) => {
+                                                                    set_state_add("false");
+                                                                }} />
+                                                        </Form.Group>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+
+                                        <hr />
+                                        <Table striped bordered hover>
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Codigo Producto</th>
+                                                    <th>Descripcion</th>
+                                                    <th>Costo por Unidad</th>
+                                                    <th>Estado</th>
+                                                    <th>Actualizar</th>
+                                                    <th>Eliminar</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                                <button type="button" class="btn btn-secondary">Editar</button>
-                                                                <button type="button" class="btn btn-secondary">Guardar</button>
-                                                                <button type="button" class="btn btn-secondary">Cancelar</button>
-                                                
-                                                            </div>
-                                                        </div>
-                                                    </td>                                       
-                                                    <td>
-                                                        <input className="dataTable-input" type="text" />
-                                                    </td>
-                                                    <td>
-                                                        <input className="dataTable-input" type="text" />
-                                                    </td>                                            
-                                                    <td>
-                                                        <input className="dataTable-input" type="number"/>
-                                                    </td>
-                                                    <td>  
-                                                        <select class="form-select" id="inputGroupSelect01">
-                                                            <option selected>Choose...</option>
-                                                            <option value="1">Disponible</option>
-                                                            <option value="2">No Disponible</option>                                                          
-                                                        </select>
-                                                    </td>                                            
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                                <button type="button" class="btn btn-secondary">Editar</button>
-                                                                <button type="button" class="btn btn-secondary">Guardar</button>
-                                                                <button type="button" class="btn btn-secondary">Cancelar</button>
-                                                
-                                                            </div>
-                                                        </div>
-                                                    </td>                                       
-                                                    <td>
-                                                        <input className="dataTable-input" type="text"/>
-                                                    </td>
-                                                    <td>
-                                                        <input className="dataTable-input" type="text" />
-                                                    </td>                                            
-                                                    <td>
-                                                        <input className="dataTable-input" type="number"/>
-                                                    </td>
-                                                    <td>  
-                                                        <select class="form-select" id="inputGroupSelect01">
-                                                            <option selected>Choose...</option>
-                                                            <option value="1">Disponible</option>
-                                                            <option value="2">No Disponible</option>                                                           
-                                                        </select>
-                                                    </td>                                            
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                                <button type="button" class="btn btn-secondary">Editar</button>
-                                                                <button type="button" class="btn btn-secondary">Guardar</button>
-                                                                <button type="button" class="btn btn-secondary">Cancelar</button>
-                                                
-                                                            </div>
-                                                        </div>
-                                                    </td>                                       
-                                                    <td>
-                                                        <input className="dataTable-input" type="text" />
-                                                    </td>
-                                                    <td>
-                                                        <input className="dataTable-input" type="text" />
-                                                    </td>                                            
-                                                    <td>
-                                                        <input className="dataTable-input" type="number"/>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select" id="inputGroupSelect01">
-                                                            <option selected>Choose...</option>
-                                                            <option value="1">Disponible</option>
-                                                            <option value="2">No Disponible</option>                                                          
-                                                        </select>
-                                                    </td>                                            
-                                                </tr>                                                                                                                     
+                                                {
+                                                    products.map((value, key) =>
+                                                        <tr>
+                                                            <td>
+                                                                {key}
+                                                            </td>
+                                                            <td>
+                                                                {value.idProduct}
+                                                            </td>
+                                                            <td>
+                                                                {value.description}
+                                                            </td>
+                                                            <td>
+                                                                {value.unit_cost}
+                                                            </td>
+                                                            <td>
+                                                                {value.state.toString()}
+                                                            </td>
+                                                            <td>
+                                                                <Button type="button" className="btn btn-secondary" onClick={
+                                                                    () => {
+                                                                        set_id_update(value._id);
+                                                                        set_idProduct_update(value.idProduct);
+                                                                        set_description_update(value.description);
+                                                                        set_unit_cost_update(value.unit_cost);
+                                                                        set_state_update(value.state.toString());
+
+                                                                        document.getElementById('idProduct_update').defaultValue = value.idProduct;
+                                                                        document.getElementById('description_update').defaultValue = value.description;
+                                                                        document.getElementById('unit_cost_update').defaultValue = value.unit_cost;
+
+                                                                    }}
+                                                                >Editar
+                                                                </Button>
+                                                            </td>
+                                                            <td>
+                                                                <Button type="button" className="btn btn-secondary" onClick={() => delete_product(value._id)}> Eliminar</Button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
                                             </tbody>
-                                        </table>
+                                        </Table>
+                                       
+                                        <Form>
+                                            <Row className="mb-3">    
+                                            <Form.Group  as ={Col} className="mb-2" controlId="formBasicidSales">
+                                                <Form.Label>Codigo Producto</Form.Label>
+                                                <Form.Control disable='true' id='idProduct_update' type="number"  onChange={
+                                                    (e) => {
+                                                        set_idProduct_update(e.target.value);
+                                                    }} />
+                                            </Form.Group>
+
+                                            <Form.Group as ={Col} className="mb-2" controlId="formBasicDescription">
+                                                <Form.Label>Descripcion</Form.Label>
+                                                <Form.Control id='description_update' type="text"  onChange={
+                                                    (e) => {
+                                                        set_description_update(e.target.value);
+                                                    }
+                                                } />
+                                            </Form.Group>
+                                            </Row>    
+                                            <Form.Group as ={Col} className="mb-2" controlId="formBasicUnitCost">
+                                                <Form.Label>Costo por unidad</Form.Label>
+                                                <Form.Control id='unit_cost_update' type="number"  onChange={
+                                                    (e) => {
+                                                        set_unit_cost_update(e.target.value);
+                                                    }
+                                                } />
+                                            </Form.Group>
+
+                                            <Form.Group className="mb-3" controlId="formBasicUnitCost2">
+                                                <Form.Check
+                                                    inline
+                                                    label="Disponible"
+                                                    name="estado"
+                                                    type="radio"
+                                                    id='1'
+                                                    onChange={(e) => {
+                                                        set_state_update("true");
+                                                    }} />
+
+                                                <Form.Check
+                                                    inline
+                                                    label="Agotado"
+                                                    name="estado"
+                                                    type="radio"
+                                                    id='0'
+                                                    onChange={(e) => {
+                                                        set_state_update("false");
+                                                    }} />
+                                            </Form.Group>
+
+                                            <Button variant="warning" onClick={
+                                                () => {
+                                                    update_product(id_update)
+                                                }} >
+                                                Actualizar
+                                            </Button>
+                                        </Form>
                                     </div>
                                 </div>
                             </div>
-                        </main> 
-                    <Footer/>
+                        </main>
+                        <Footer />
+                    </div>
                 </div>
             </div>
         </div>
-</div>
-  );
+    );
 }
 
-export default MaestroProductos;   
+export default MaestroProductos;

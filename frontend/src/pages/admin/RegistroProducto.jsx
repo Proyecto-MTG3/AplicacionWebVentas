@@ -3,12 +3,35 @@ import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
 import 'react-bootstrap';
+import {Form} from 'react-bootstrap';
 import 'bootstrap';
 import 'styles/styles.css';
-
+import {useState} from 'react';
+import Axios from 'axios';
 
 
 const RegistroProducto = () => {
+
+    const [idProduct_add, set_idProduct_add] = useState(0);
+    const [description_add, set_description_add] =  useState("");
+    const [unit_cost_add, set_unit_cost_add] = useState(0);
+    const [state_add, set_state_add] = useState("true");
+  
+
+    
+  
+    const add_product_db = () => {
+      console.log(idProduct_add + description_add + unit_cost_add + state_add)
+      Axios.post('http://localhost:3001/api/v1/product/add',{
+        idProduct: idProduct_add,
+        description: description_add,
+        unit_cost: unit_cost_add,
+        state: state_add
+      });
+    }
+
+
+
     return (
 
 
@@ -38,7 +61,7 @@ const RegistroProducto = () => {
                                             <div className="col-md-4 inputGroupContainer">
                                                 <div className="input-group">
                                                     <span className="input-group-addon"><i className="glyphicon glyphicon-barcode"></i></span>
-                                                    <input  name="first_name" placeholder="NUMERO ID" className="form-control"  type="text"/>
+                                                    <input  name="first_name" placeholder="NUMERO ID" className="form-control"  type="number" onChange = {(e) =>{set_idProduct_add(e.target.value);}}/>
                                                 </div>
                                             </div>
                                         </div>
@@ -48,7 +71,7 @@ const RegistroProducto = () => {
                                             <div className="col-md-4 inputGroupContainer">
                                                 <div className="input-group">
                                                     <span className="input-group-addon" href="index.html"><i className="glyphicon glyphicon-user"></i></span>
-                                                    <input name="last_name" placeholder="NOMBRE PRODUCTO" className="form-control"  type="text"/>
+                                                    <input name="last_name" placeholder="NOMBRE PRODUCTO" className="form-control"  type="text"onChange = {(e) =>{set_description_add(e.target.value);}} />
                                                 </div>
                                             </div>
                                         </div>
@@ -58,41 +81,40 @@ const RegistroProducto = () => {
                                             <div className="col-md-4 inputGroupContainer">
                                                 <div className="input-group">
                                                     <span className="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                                    <input  name="user_name" placeholder="$ $ $" className="form-control"  type="number"/>
+                                                    <input  name="user_name" placeholder="$ $ $" className="form-control"  type="number" onChange = {(e) =>{set_unit_cost_add(e.target.value);}}/>
                                                 </div>
                                             </div>
                                         </div>
                                         <br></br>
-                                        <div className= "form-group "> 
-                                            <label className="col-md-4 control-label">ESTADO</label>
-                                            <div className="col-md-4 selectContainer">
-                                                <div className="input-group">
-                                                    <span className="input-group-addon"><i className="glyphicon glyphicon-list"></i></span>
-                                                    <select name="department" className="form-control selectpicker">
-                                                        <option value=""disabled="disabled">SELECCION ESTADO </option>
-                                                        <option>DISPONIBLE</option>
-                                                        <option>NO DISPONIBLE</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            <Form.Group className="mb-3" controlId="formBasicUnitCost">
+                                                            <Form.Check
+                                                            inline
+                                                            label = "Disponible"
+                                                            name = "estado"
+                                                            type = "radio"
+                                                            id = '1'
+                                                            onChange = {(e) =>{
+                                                                set_state_add("true");
+                                                            }}/>            
+
+                                                            <Form.Check
+                                                                inline
+                                                                label = "Agotado"
+                                                                name = "estado"
+                                                                type = "radio"
+                                                                id = '0'
+                                                                onChange = {(e) =>{
+                                                                set_state_add("false");
+                                                            }}/>            
+                                            </Form.Group>
                                     </center>    
                                     <br></br>                  
                                     <center>
                                         <div>
-                                            <button onclick="cancelarLista()" class="btn btn-danger">CANCELAR</button>
-                                            <button onclick="agregarLista()" class="btn btn-success">AGREGAR</button>
+                                            <button onclick="clear" class="btn btn-danger">CANCELAR</button>
+                                            <button onClick = {add_product_db} class="btn btn-success">AGREGAR</button>
 
-                                            <script>
-                                                {/* function agregarLista(evento) {
-                                                event.preventDefault()
-                                                alert ("¡Registro creado con exito!");
-                                                }
-                                                function cancelarLista(evento) {
-                                                    event.preventDefault()
-                                                    alert("¡Registro cancelado!")  
-                                                } */}
-                                            </script>
+
                                         </div>    
                                     </center>                       
                                 </div>
