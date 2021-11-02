@@ -5,7 +5,7 @@ import Sidebar from 'components/Sidebar';
 import 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/styles.css';
-import { Form, Button, Table} from 'react-bootstrap';
+import { Form, Button, Table, Row,Col} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 
@@ -202,7 +202,7 @@ const MaestroUsuario = () => {
                                                     {value.state.toString()}
                                                     </td> 
                                                     <td>
-                                                    <Button variant = 'warning' onClick ={
+                                                    <Button type="button" className="btn btn-secondary" onClick ={
                                                         () => {
                                                         set_id_update(value._id);
                                                         set_idUsers_update(value.idUsers);
@@ -223,7 +223,7 @@ const MaestroUsuario = () => {
                                                         </Button>
                                                     </td>
                                                     <td>
-                                                    <Button variant = 'danger' onClick={() => delete_users(value._id)}> Eliminar</Button>
+                                                    <Button type="button" className="btn btn-secondary" onClick={() => delete_users(value._id)}> Eliminar</Button>
                                                     </td>                                                                                                          
                                                     </tr>
                                                 )
@@ -233,83 +233,84 @@ const MaestroUsuario = () => {
 
                                                 <hr/>
                                         <Form>
-                                            <Form.Group className="mb-3" controlId="formBasicidUsers">
-                                                <Form.Label>Codigo del usuario</Form.Label>
-                                                <Form.Control disable='true' id='idUsers_update' type="number" placeholder=" Ingrese el codigo del usuario" onChange = {
-                                                (e) =>{
-                                                    set_idUsers_update(e.target.value);
-                                                } }/>            
-                                            </Form.Group>
+                                            <Row className="mb-3">
+                                                <Form.Group   as={Col} className="mb-3" controlId="formBasicidUsers">
+                                                    <Form.Label>Codigo del usuario</Form.Label>
+                                                    <Form.Control disable='true' id='idUsers_update' type="number" placeholder=" Ingrese el codigo del usuario" onChange = {
+                                                    (e) =>{
+                                                        set_idUsers_update(e.target.value);
+                                                    } }/>            
+                                                </Form.Group>
 
-                                            <Form.Group className="mb-3" controlId="formBasicNombre">
-                                                <Form.Label>Nombre Usuario</Form.Label>
-                                                <Form.Control id='nombre_update' type="text" placeholder=" Ingrese el nombre del usuario" onChange = {
-                                                (e) =>{
-                                                    set_nombre_update(e.target.value);
-                                                }
-                                                } />            
-                                            </Form.Group>
+                                                <Form.Group as={Col}  className="mb-3" controlId="formBasicNombre">
+                                                    <Form.Label>Nombre Usuario</Form.Label>
+                                                    <Form.Control id='nombre_update' type="text" placeholder=" Ingrese el nombre del usuario" onChange = {
+                                                    (e) =>{
+                                                        set_nombre_update(e.target.value);
+                                                    }
+                                                    } />            
+                                                </Form.Group>
 
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Email</Form.Label>
-                                                <Form.Control id = 'email_update' type="text" placeholder=" Ingrese el email" onChange = {
-                                                (e) =>{
-                                                    set_email_update(e.target.value);
-                                                }
-                                                } />            
-                                            </Form.Group>
+                                                <Form.Group as={Col}  className="mb-3" controlId="formBasicEmail">
+                                                    <Form.Label>Email</Form.Label>
+                                                    <Form.Control id = 'email_update' type="text" placeholder=" Ingrese el email" onChange = {
+                                                    (e) =>{
+                                                        set_email_update(e.target.value);
+                                                    }
+                                                    } />            
+                                                </Form.Group>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Form.Group  as={Col} className="mb-3" controlId="formBasicPassword">
+                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Control id = 'password_update' type="text" placeholder=" Ingrese el password" onChange = {
+                                                    (e) =>{
+                                                        set_password_update(e.target.value);
+                                                    }
+                                                    } />            
+                                                </Form.Group>
 
-                                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                                <Form.Label>Password</Form.Label>
-                                                <Form.Control id = 'password_update' type="text" placeholder=" Ingrese el password" onChange = {
-                                                (e) =>{
-                                                    set_password_update(e.target.value);
-                                                }
-                                                } />            
-                                            </Form.Group>
-
-                                            <Form.Group className="mb-3" controlId="formBasicRol">
-                                                <Form.Label>Rol</Form.Label>
-                                                <Form.Control id = 'rol_update' type="text" placeholder=" Ingrese el rol" onChange = {
-                                                (e) =>{
-                                                    set_rol_update(e.target.value);
-                                                }
-                                                } />            
-                                            </Form.Group> 
-
-                                            <Form.Group className="mb-3" controlId="formBasicUnitCost2">
-                                                <Form.Check
-                                                inline
-                                                label = "Pendiente"
-                                                name = "estado"
-                                                type = "radio"
-                                                id = '1'
-                                                onChange = {(e) =>{
-                                                    set_state_update("Pendiente");
-                                                }}/>            
-
-                                                <Form.Check
+                                                <Form.Group  as={Col} className="mb-3" controlId="formBasicRol">
+                                                    <Form.Label>Rol</Form.Label>
+                                                    <Form.Control id = 'rol_update' type="text" placeholder=" Ingrese el rol" onChange = {
+                                                    (e) =>{
+                                                        set_rol_update(e.target.value);
+                                                    }
+                                                    } />            
+                                                </Form.Group> 
+                                                    
+                                                <Form.Group className="mb-3" controlId="formBasicUnitCost2">
+                                                    <Form.Check
                                                     inline
-                                                    label = "Autorizado"
+                                                    label = "Pendiente"
                                                     name = "estado"
                                                     type = "radio"
-                                                    id = '0'
+                                                    id = '1'
                                                     onChange = {(e) =>{
-                                                    set_state_update("Autorizado");
-                                                }}/>
+                                                        set_state_update("Pendiente");
+                                                    }}/>            
 
-                                                <Form.Check
-                                                    inline
-                                                    label = "Bloqueado"
-                                                    name = "estado"
-                                                    type = "radio"
-                                                    id = '0'
-                                                    onChange = {(e) =>{
-                                                    set_state_update("Bloqueado");
-                                                }}/>            
-                                            </Form.Group> 
+                                                    <Form.Check
+                                                        inline
+                                                        label = "Autorizado"
+                                                        name = "estado"
+                                                        type = "radio"
+                                                        id = '0'
+                                                        onChange = {(e) =>{
+                                                        set_state_update("Autorizado");
+                                                    }}/>
 
-
+                                                    <Form.Check
+                                                        inline
+                                                        label = "Bloqueado"
+                                                        name = "estado"
+                                                        type = "radio"
+                                                        id = '0'
+                                                        onChange = {(e) =>{
+                                                        set_state_update("Bloqueado");
+                                                    }}/>            
+                                                </Form.Group> 
+                                            </Row>
                                             <Button variant="warning"  onClick = {
                                                 ()=>{
 
