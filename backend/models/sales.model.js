@@ -9,7 +9,7 @@ const sales_schema = new mongoose.Schema ({
     },    
     fecha:{
         type: Date,
-        required:true,
+        required:true
     },
     idProduct: {
         type: String,
