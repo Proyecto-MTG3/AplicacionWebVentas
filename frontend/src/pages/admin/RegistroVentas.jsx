@@ -5,6 +5,8 @@ import Sidebar from 'components/Sidebar';
 import 'react-bootstrap';
 import {Form} from 'react-bootstrap';
 import 'bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'styles/styles.css';
 import {useState} from 'react';
 import Axios from 'axios';
@@ -41,6 +43,7 @@ const RegistroVentas = () => {
             nombreVendedor: nombreVendedor_add,
             state: state_add
         });
+        toast.success('Producto Agregado');
     }
 
 
@@ -70,19 +73,19 @@ const RegistroVentas = () => {
                                             Ventas 
                                         </div>
                                         
-                                        <div className="card-body">
+                                        <div type='submit' className="card-body">
             
 
-                                            <div id="datatablesSimple" > 
+                                            <div  id="datatablesSimple" > 
 
                                                 <div className="row">
                                                     <div className="col">
                                                     
-                                                    <input type="date" className="form-control" placeholder="Fecha" aria-label="Fecha" onChange={(e) => { set_fecha_add(e.target.value); }} />
+                                                    <input type="date" className="form-control" placeholder="Fecha" aria-label="Fecha" onChange={(e) => { set_fecha_add(e.target.value); }} required/>
                                                     </div>
                                                     <div class="col">
                                                         
-                                                    <input type="text" className="form-control" placeholder="Id Venta" aria-label="Id Venta" onChange={(e) => { set_idSales_add(e.target.value); }} />
+                                                    <input type="text" className="form-control" placeholder="Id Venta" aria-label="Id Venta" onChange={(e) => { set_idSales_add(e.target.value); }} required/>
                                                     </div>
                                                 </div>
                                              </div>   
@@ -106,16 +109,16 @@ const RegistroVentas = () => {
 
                                                     <tr>
                                                         <td>
-                                                            <input className="dataTable-input" type="text" onChange={(e) => { set_idProduct_add(e.target.value); }} />
+                                                            <input className="dataTable-input" type="text" onChange={(e) => { set_idProduct_add(e.target.value); }} required/>
                                                         </td>
                                                         <td>
-                                                            <input className="dataTable-input" type="text" onChange={(e) => { set_description_add(e.target.value); }} />
+                                                            <input className="dataTable-input" type="text" onChange={(e) => { set_description_add(e.target.value); }} required/>
                                                         </td>                                            
                                                         <td>
-                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_cantidad_add(e.target.value); }} />
+                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_cantidad_add(e.target.value); }} required/>
                                                         </td>
                                                         <td>
-                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_unit_cost_add(e.target.value); }} />
+                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_unit_cost_add(e.target.value); }} required/>
                                                         </td>                                            
                                                     </tr>
 
@@ -142,20 +145,20 @@ const RegistroVentas = () => {
                                                             TOTAL
                                                         </th>
                                                         <td>
-                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_total_cost_add(e.target.value); }}/>
+                                                            <input className="dataTable-input" type="number" onChange={(e) => { set_total_cost_add(e.target.value); }} required/>
                                                         </td>                                            
                                                     </tr>                                                                                            
                                                 </tbody>                                                                       
                                             </table> 
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text"  id="basic-addon1">Documento Cliente</span>
-                                                <input type="number" className="form-control" placeholder="Documento" aria-label="Documento" aria-describedby="basic-addon1" onChange={(e) => { set_idUsers_add(e.target.value); }} />                            
+                                                <input type="number" className="form-control" placeholder="Documento" aria-label="Documento" aria-describedby="basic-addon1" onChange={(e) => { set_idUsers_add(e.target.value); }} required/>                            
                                                 <span class="input-group-text" id="basic-addon2">Nombre</span>
-                                                <input type="text" className="form-control" placeholder="Nombre Cliente" aria-label="Nombre Cliente" aria-describedby="basic-addon2" onChange={(e) => { set_nombreCliente_add(e.target.value); }} />
+                                                <input type="text" className="form-control" placeholder="Nombre Cliente" aria-label="Nombre Cliente" aria-describedby="basic-addon2" onChange={(e) => { set_nombreCliente_add(e.target.value); }} required/>
                                             </div>                                           
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text" id="basic-addon3">Vendedor</span>
-                                                <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={(e) => { set_nombreVendedor_add(e.target.value); }} />
+                                                <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3" onChange={(e) => { set_nombreVendedor_add(e.target.value); }} required/>
                                             </div>
                                                 <td>
                                                     <Form.Group className="mb-3" controlId="formBasicUnitCost">
@@ -191,7 +194,8 @@ const RegistroVentas = () => {
                                                     </Form.Group>
                                                 </td>                                                                                           
                                                                                              
-                                            <div><button  onClick={add_sales_db}  type="button" className="btn btn-success">Agregar Ventas</button></div>                                                                                                                             
+                                            <div><button  onClick={add_sales_db}  type="submit" className="btn btn-success">Agregar Ventas</button></div> 
+                                            <ToastContainer position="top-center" autoClose={5000} />                                                                                                                            
                                         </div>
                                     </div>
                                 </div>

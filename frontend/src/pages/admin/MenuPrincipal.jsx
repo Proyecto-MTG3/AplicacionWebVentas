@@ -4,6 +4,7 @@ import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
 import 'react-bootstrap';
 import 'bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
 import 'styles/styles.css';
 
 

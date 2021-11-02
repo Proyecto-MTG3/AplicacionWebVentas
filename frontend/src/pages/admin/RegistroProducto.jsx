@@ -5,6 +5,8 @@ import Footer from 'components/Footer';
 import 'react-bootstrap';
 import {Form} from 'react-bootstrap';
 import 'bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'styles/styles.css';
 import {useState} from 'react';
 import Axios from 'axios';
@@ -28,6 +30,7 @@ const RegistroProducto = () => {
         unit_cost: unit_cost_add,
         state: state_add
       });
+      toast.success('Producto Agregado');
     }
 
 
@@ -45,7 +48,7 @@ const RegistroProducto = () => {
                                     <div className="container-fluid "   styles="position:-ms-page;">
                                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                             <button className="btn btn-primary me-md-2" type="button">Productos Registrados</button>
-                                            <button type="button" className="btn btn-success"><span className="glyphicon glyphicon-home"></span>
+                                            <button type="submit" className="btn btn-success"><span className="glyphicon glyphicon-home"></span>
                                             Inicio</button>
                                         </div>
                                     </div>
@@ -60,8 +63,8 @@ const RegistroProducto = () => {
                                             <label className="col-md-4 control-label">ID</label>  
                                             <div className="col-md-4 inputGroupContainer">
                                                 <div className="input-group">
-                                                    <span className="input-group-addon"><i className="glyphicon glyphicon-barcode"></i></span>
-                                                    <input  name="first_name" placeholder="NUMERO ID" className="form-control"  type="number" onChange = {(e) =>{set_idProduct_add(e.target.value);}}/>
+                                                    
+                                                    <input  name="first_name" placeholder="NUMERO ID" className="form-control"  type="number" onChange = {(e) =>{set_idProduct_add(e.target.value);}} required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -70,8 +73,8 @@ const RegistroProducto = () => {
                                             <label className="col-md-4 control-label" >NOMBRE PRODUCTO</label> 
                                             <div className="col-md-4 inputGroupContainer">
                                                 <div className="input-group">
-                                                    <span className="input-group-addon" href="index.html"><i className="glyphicon glyphicon-user"></i></span>
-                                                    <input name="last_name" placeholder="NOMBRE PRODUCTO" className="form-control"  type="text"onChange = {(e) =>{set_description_add(e.target.value);}} />
+                                                    
+                                                    <input name="last_name" placeholder="NOMBRE PRODUCTO" className="form-control"  type="text" onChange = {(e) =>{set_description_add(e.target.value);}} required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -80,8 +83,8 @@ const RegistroProducto = () => {
                                             <label className="col-md-4 control-label">VALOR UNITARIO</label>  
                                             <div className="col-md-4 inputGroupContainer">
                                                 <div className="input-group">
-                                                    <span className="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                                    <input  name="user_name" placeholder="$ $ $" className="form-control"  type="number" onChange = {(e) =>{set_unit_cost_add(e.target.value);}}/>
+                                                    
+                                                    <input  name="user_name" placeholder="$ $ $" className="form-control"  type="number" onChange = {(e) =>{set_unit_cost_add(e.target.value);}} required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,12 +114,11 @@ const RegistroProducto = () => {
                                     <br></br>                  
                                     <center>
                                         <div>
-                                            <button onClick='clear' class="btn btn-danger">CANCELAR</button>
-                                            <button onClick = {add_product_db} class="btn btn-success">AGREGAR</button>
-
-
+                                            <button type='submit' onClick='clear' class="btn btn-danger">CANCELAR</button>
+                                            <button type = 'submit' onClick = {add_product_db} class="btn btn-success">AGREGAR</button>
                                         </div>    
-                                    </center>                       
+                                    </center> 
+                                    <ToastContainer position="top-center" autoClose={5000} />                       
                                 </div>
                             </main>
                         <Footer />

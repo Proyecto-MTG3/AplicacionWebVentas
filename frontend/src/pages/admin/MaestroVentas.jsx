@@ -2,10 +2,12 @@ import React from 'react'
 import Footer from 'components/Footer';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
+import 'styles/styles.css';
 import 'react-bootstrap';
 import 'bootstrap';
-import 'styles/styles.css';
 import { Form, Button, Table, Row, Col } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 
@@ -42,6 +44,7 @@ const MaestroVentas = () => {
 
     const delete_sales = (_id) => {
         Axios.delete('http://localhost:3001/api/v1/sales/delete/' + _id)
+        toast.warn('Eliminado')
     }
 
     const update_sales = (_id) => {
@@ -58,7 +61,8 @@ const MaestroVentas = () => {
             nombreCliente: nombreCliente_update,
             nombreVendedor: nombreVendedor_update,
             state: state_update
-        })
+        }) 
+        toast.success('Actualizado');
     }
 
 
@@ -195,28 +199,28 @@ const MaestroVentas = () => {
                                                 <Form.Control disable='true' id='fecha_update' type="" onChange={
                                                     (e) => {
                                                         set_fecha_update(e.target.value);
-                                                    }} />
+                                                    }} required/>
                                             </Form.Group>
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicidUser">
                                                 <Form.Label>Codigo Cliente</Form.Label>
                                                 <Form.Control disable='true' id='idUsers_update' type="number" onChange={
                                                     (e) => {
                                                         set_idUsers_update(e.target.value);
-                                                    }} />
+                                                    }} required/>
                                             </Form.Group>
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicnombreCliente">
                                                 <Form.Label>Nombre Cliente</Form.Label>
                                                 <Form.Control disable='true' id='nombreCliente_update' type="text" onChange={
                                                     (e) => {
                                                         set_nombreCliente_update(e.target.value);
-                                                    }} />
+                                                    }} required/>
                                             </Form.Group>
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicnombreVendedor">
                                                 <Form.Label>NombreVendedor</Form.Label>
                                                 <Form.Control disable='true' id='nombreVendedor_update' type="text" onChange={
                                                     (e) => {
                                                         set_nombreVendedor_update(e.target.value);
-                                                    }} />
+                                                    }} required/>
                                             </Form.Group>
                                         </Row>
                                         <Row className="mb-3">
@@ -226,7 +230,7 @@ const MaestroVentas = () => {
                                                 <Form.Control disable='true' id='idSales_update' type="number" onChange={
                                                     (e) => {
                                                         set_idSales_update(e.target.value);
-                                                    }} />
+                                                    }} required/>
                                             </Form.Group>
 
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicidProduct">
@@ -234,7 +238,7 @@ const MaestroVentas = () => {
                                                 <Form.Control disable='true' id='idProduct_update' type="number" onChange={
                                                     (e) => {
                                                         set_idProduct_update(e.target.value);
-                                                    }} />
+                                                    }} required/>
                                             </Form.Group>
 
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicDescription">
@@ -243,7 +247,7 @@ const MaestroVentas = () => {
                                                     (e) => {
                                                         set_description_update(e.target.value);
                                                     }
-                                                } />
+                                                } required/>
                                             </Form.Group>
                                         </Row>
 
@@ -253,7 +257,7 @@ const MaestroVentas = () => {
                                                 <Form.Control disable='true' id='cantidad_update' type="number" onChange={
                                                     (e) => {
                                                         set_cantidad_update(e.target.value);
-                                                    }} />
+                                                    }} required/>
                                             </Form.Group>
 
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicUnitCost">
@@ -262,11 +266,11 @@ const MaestroVentas = () => {
                                                     (e) => {
                                                         set_unit_cost_update(e.target.value);
                                                     }
-                                                } />
+                                                } required/>
                                             </Form.Group>
                                             <Form.Group as={Col} className="mb-3" controlId="formBasicTotalCost">
                                                 <Form.Label>Costo Total</Form.Label>
-                                                <Form.Control id='total_cost_update' type="number" onChange={(e) => {set_total_cost_update(e.target.value); }} />
+                                                <Form.Control id='total_cost_update' type="number" onChange={(e) => {set_total_cost_update(e.target.value); }} required/>
                                                
                                             </Form.Group>
                                         </Row>
@@ -301,10 +305,11 @@ const MaestroVentas = () => {
                                                 }} />                                               
                                         </Form.Group>
 
-                                        <Button variant="warning" onClick={() => {update_sales(id_update)}}>
+                                        <Button type= 'submit' variant="warning" onClick={() => {update_sales(id_update)}}>
                                             Actualizar
                                         </Button>
                                     </Form>
+                                    <ToastContainer position="top-center" autoClose={5000} /> 
                                 </div>
                             </div>
                         </div>

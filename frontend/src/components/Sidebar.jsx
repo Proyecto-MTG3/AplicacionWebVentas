@@ -9,7 +9,9 @@ const Sidebar = () => {
             <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div className="sb-sidenav-menu">
                     <div className="nav">
-                        <div className="sb-sidenav-menu-heading">PONER LOGO AQUÍ</div>
+                        <div className="sb-sidenav-menu-heading">
+                            PONER Logo
+                        </div>
                         <Link className="nav-link" to="/admin/MenuPrincipal">
                             <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                             Menú principal
@@ -23,8 +25,8 @@ const Sidebar = () => {
                         </div>
                         <div className="collapse" id="collapseVentas" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                <Link className="nav-link" to="/admin/MaestroVentas">Maestro ventas</Link>
-                                <Link className="nav-link" to="/admin/RegistroVentas">Registro ventas</Link>                        
+                                <Link className="nav-link" to="/admin/RegistroVentas">Registro ventas</Link>
+                                <Link className="nav-link" to="/admin/MaestroVentas">Maestro ventas</Link>                        
                             </nav>
                         </div>                   
                     
@@ -35,8 +37,8 @@ const Sidebar = () => {
                         </div>
                         <div className="collapse" id="collapseProductos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                <Link className="nav-link" to="/admin/MaestroProductos">Maestro productos</Link>
                                 <Link className="nav-link" to="/admin/RegistroProducto">Registro productos</Link>
+                                <Link className="nav-link" to="/admin/MaestroProductos">Maestro productos</Link>
                             </nav>
                         </div>
 

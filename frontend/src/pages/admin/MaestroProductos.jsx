@@ -6,6 +6,8 @@ import 'styles/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Table,Col, Row } from 'react-bootstrap';
 import 'bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 
@@ -33,6 +35,7 @@ function MaestroProductos() {
 
     const delete_product = (_id) => {
         Axios.delete('http://localhost:3001/api/v1/product/delete/' + _id)
+        toast.warn('Eliminado')
     }
 
     const update_product = (_id) => {
@@ -43,6 +46,7 @@ function MaestroProductos() {
             unit_cost: unit_cost_update,
             state: state_update
         })
+        toast.success('Actualizado');
     }
 
 
@@ -132,7 +136,7 @@ function MaestroProductos() {
                                                 <Form.Control disable='true' id='idProduct_update' type="number"  onChange={
                                                     (e) => {
                                                         set_idProduct_update(e.target.value);
-                                                    }} />
+                                                    }} required />
                                             </Form.Group>
 
                                             <Form.Group as ={Col} className="mb-2" controlId="formBasicDescription">
@@ -141,7 +145,7 @@ function MaestroProductos() {
                                                     (e) => {
                                                         set_description_update(e.target.value);
                                                     }
-                                                } />
+                                                } required/>
                                             </Form.Group>
                                             </Row>    
                                             <Form.Group as ={Col} className="mb-2" controlId="formBasicUnitCost">
@@ -150,7 +154,7 @@ function MaestroProductos() {
                                                     (e) => {
                                                         set_unit_cost_update(e.target.value);
                                                     }
-                                                } />
+                                                }  required/>
                                             </Form.Group>
 
                                             <Form.Group className="mb-3" controlId="formBasicState">
@@ -162,7 +166,7 @@ function MaestroProductos() {
                                                     id='1'
                                                     onChange={(e) => {
                                                         set_state_update("true");
-                                                    }} />
+                                                    }}  />
 
                                                 <Form.Check
                                                     inline
@@ -175,10 +179,11 @@ function MaestroProductos() {
                                                     }} />
                                             </Form.Group>
 
-                                            <Button variant="warning" onClick={() => {update_product(id_update)}}>
+                                            <Button  type='submit' variant="warning" onClick={() => {update_product(id_update)}}>
                                                 Actualizar
                                             </Button>
-                                        </Form>
+                                        </Form> 
+                                        <ToastContainer position="top-center" autoClose={5000} />                                  
                                     </div>
                                 </div>
                             </div>

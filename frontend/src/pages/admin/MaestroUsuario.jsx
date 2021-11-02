@@ -4,10 +4,14 @@ import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
 import 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import 'styles/styles.css';
+import {ToastContainer, toast} from 'react-toastify';
 import { Form, Button, Table, Row,Col} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
+import {Tooltip} from '@material-ui/core';
+
 
  
 
@@ -32,6 +36,8 @@ const MaestroUsuario = () => {
   
     const [users, set_users] = useState([])
 
+   
+
     useEffect(() => {
         Axios.get('http://localhost:3001/api/v1/users/list').then((res) =>{
           console.log(res.data.users)
@@ -50,10 +56,12 @@ const MaestroUsuario = () => {
          rol: rol_add,
          state: state_add
        });
+       toast.success('Usuario Agregado');
      }
    
      const delete_users = (_id) => {
        Axios.delete('http://localhost:3001/api/v1/users/delete/' + _id)
+       toast.warn('Eliminado')
      }
    
      const update_users = (_id) => {
@@ -66,6 +74,7 @@ const MaestroUsuario = () => {
          rol: rol_update,
          state: state_update
        })
+       toast.success('Actualizado');
      }
 
 
@@ -95,9 +104,7 @@ const MaestroUsuario = () => {
                                     Usuarios
                                 </div>
                                 <div class="card-body">
-                                    <div>
-                                        <button onClick={add_users_db}  class="btn btn-success">Agregar Usuario</button>
-                                    </div>
+
                                     <div id="datatablesSimple">
                                         <thead>
                                             <tr>
@@ -112,22 +119,22 @@ const MaestroUsuario = () => {
 
                                             <tr> 
                                                 <td>
-                                                    <input className="input" type="number" id="idUsuario"   required  onChange={(e) => { set_idUsers_add(e.target.value); }}></input>
+                                                    <input  type="number" id="idUsuario"  onChange={(e) => { set_idUsers_add(e.target.value); }} required />
                                                 </td>
 
                                                 <td>
-                                                    <input className="input" type="text" id="nombre"  required  onChange={(e) => { set_nombre_add(e.target.value); }}></input>
+                                                    <input  type="text" id="nombre"  onChange={(e) => { set_nombre_add(e.target.value); }} required />
                                                 </td>
 
                                                 <td>
-                                                    <input className="input" type="text" id="email"  required  onChange={(e) => {set_email_add(e.target.value); }}></input>
+                                                    <input  type="text" id="email"  onChange={(e) => {set_email_add(e.target.value); }} required/>
                                                 </td>
                                                 <td>
-                                                    <input className="input" type="text" required  onChange={(e) => { set_password_add(e.target.value); }}/>
+                                                    <input  type="text"  onChange={(e) => { set_password_add(e.target.value); }} required/>
                                                 </td>                                            
                                                 <td>
-                                                    <input className="input" type="text" onChange={(e) => { set_rol_add(e.target.value); }}/>
-                                                </td> 
+                                                    <input  type="text" onChange={(e) => { set_rol_add(e.target.value); }} required/>
+                                                </td>  
                                                 <Form.Group className="mb-3" controlId="formBasicUnitCost">
                                                     <Form.Check
                                                     inline
@@ -161,6 +168,10 @@ const MaestroUsuario = () => {
 
                                                 </Form.Group>                                      
                                             </tr>
+                                            <div>
+                                                <button  type ='submit' class="btn btn-success" onClick={add_users_db} >Agregar Usuario</button>
+                                            </div>
+
                                             <hr/>
                                         <Table striped bordered hover>
                                             <thead>
@@ -200,7 +211,8 @@ const MaestroUsuario = () => {
                                                     </td>
                                                     <td>
                                                     {value.state.toString()}
-                                                    </td> 
+                                                    </td>
+                                                    <Tooltip title=" Editar Usuario"> 
                                                     <td>
                                                     <Button type="button" className="btn btn-secondary" onClick ={
                                                         () => {
@@ -220,14 +232,19 @@ const MaestroUsuario = () => {
                                                         
                                                         }}
                                                         >Editar
-                                                        </Button>
+                                                        </Button>                                                       
                                                     </td>
+                                                    </Tooltip>
+                                                    <Tooltip  title= "Eliminar usuario" arrow placement='right-start' >
                                                     <td>
                                                     <Button type="button" className="btn btn-secondary" onClick={() => delete_users(value._id)}> Eliminar</Button>
-                                                    </td>                                                                                                          
+                                                    </td> 
+                                                    </Tooltip>                                                                                                         
                                                     </tr>
                                                 )
                                                 }
+
+
                                             </tbody>
                                         </Table>
 
@@ -239,7 +256,7 @@ const MaestroUsuario = () => {
                                                     <Form.Control disable='true' id='idUsers_update' type="number" placeholder=" Ingrese el codigo del usuario" onChange = {
                                                     (e) =>{
                                                         set_idUsers_update(e.target.value);
-                                                    } }/>            
+                                                    } } required/>            
                                                 </Form.Group>
 
                                                 <Form.Group as={Col}  className="mb-3" controlId="formBasicNombre">
@@ -248,7 +265,7 @@ const MaestroUsuario = () => {
                                                     (e) =>{
                                                         set_nombre_update(e.target.value);
                                                     }
-                                                    } />            
+                                                    } required/>            
                                                 </Form.Group>
 
                                                 <Form.Group as={Col}  className="mb-3" controlId="formBasicEmail">
@@ -257,7 +274,7 @@ const MaestroUsuario = () => {
                                                     (e) =>{
                                                         set_email_update(e.target.value);
                                                     }
-                                                    } />            
+                                                    } required/>            
                                                 </Form.Group>
                                             </Row>
                                             <Row className="mb-3">
@@ -267,7 +284,7 @@ const MaestroUsuario = () => {
                                                     (e) =>{
                                                         set_password_update(e.target.value);
                                                     }
-                                                    } />            
+                                                    } required/>            
                                                 </Form.Group>
 
                                                 <Form.Group  as={Col} className="mb-3" controlId="formBasicRol">
@@ -276,7 +293,7 @@ const MaestroUsuario = () => {
                                                     (e) =>{
                                                         set_rol_update(e.target.value);
                                                     }
-                                                    } />            
+                                                    } required/>            
                                                 </Form.Group> 
                                                     
                                                 <Form.Group className="mb-3" controlId="formBasicUnitCost2">
@@ -311,7 +328,7 @@ const MaestroUsuario = () => {
                                                     }}/>            
                                                 </Form.Group> 
                                             </Row>
-                                            <Button variant="warning"  onClick = {
+                                            <Button type='submit' variant="warning"  onClick = {
                                                 ()=>{
 
                                                 
@@ -319,7 +336,8 @@ const MaestroUsuario = () => {
                                                 Actualizar
                                             </Button>
                                         </Form>
-                                    </div>                                                                                                 
+                                    </div> 
+                                    <ToastContainer position="top-center" autoClose={5000} />                                                                                                  
                                 </div>
                             </div>
                         </div>
