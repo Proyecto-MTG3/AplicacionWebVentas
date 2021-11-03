@@ -20,6 +20,7 @@ const MaestroUsuario = () => {
 
     const [idUsers_add, set_idUsers_add] = useState(0);
     const [nombre_add, set_nombre_add] =  useState("");
+    const [apellido_add, set_apellido_add] =  useState("");
     const [email_add, set_email_add] = useState("");
     const [password_add, set_password_add] = useState("");
     const [rol_add, set_rol_add] = useState("");
@@ -27,6 +28,7 @@ const MaestroUsuario = () => {
   
     const [idUsers_update, set_idUsers_update] = useState(0);
     const [nombre_update, set_nombre_update] =  useState("");
+    const [apellido_update, set_apellido_update] =  useState("");
     const [email_update, set_email_update] = useState("");
     const [password_update, set_password_update] = useState("");
     const [rol_update, set_rol_update] = useState("");
@@ -47,10 +49,11 @@ const MaestroUsuario = () => {
      
    
      const add_users_db = () => {
-       console.log(idUsers_add + nombre_add + email_add + password_add + rol_add + state_add)
+       console.log(idUsers_add + nombre_add + apellido_add + email_add + password_add + rol_add + state_add)
        Axios.post('http://localhost:3001/api/v1/users/add',{
          idUsers: idUsers_add,
          nombre: nombre_add,
+         apellido: apellido_add,
          email: email_add,
          password: password_add,
          rol: rol_add,
@@ -69,6 +72,7 @@ const MaestroUsuario = () => {
          _id: _id,
          idUsers: idUsers_update,
          nombre: nombre_update,
+         apellido: apellido_update,
          email: email_update,
          password: password_update,
          rol: rol_update,
@@ -110,6 +114,7 @@ const MaestroUsuario = () => {
                                             <tr>
                                                 <th>Codigo Usuario</th>
                                                 <th>Nombre</th>
+                                                <th>Apellido</th>
                                                 <th>Correo Electrónico</th>
                                                 <th>Contraseña</th>
                                                 <th>Rol</th>
@@ -124,6 +129,10 @@ const MaestroUsuario = () => {
 
                                                 <td>
                                                     <input  type="text" id="nombre"  onChange={(e) => { set_nombre_add(e.target.value); }} required />
+                                                </td>
+
+                                                <td>
+                                                    <input  type="text" id="apellido"  onChange={(e) => { set_apellido_add(e.target.value); }} required />
                                                 </td>
 
                                                 <td>
@@ -179,6 +188,7 @@ const MaestroUsuario = () => {
                                                 <th>#</th>
                                                 <th>Codigo Usuario</th>
                                                 <th>Nombre</th>
+                                                <th>Apellido</th>
                                                 <th>Correo Electronico</th>
                                                 <th>Contraseña</th>
                                                 <th>Rol</th>
@@ -201,6 +211,9 @@ const MaestroUsuario = () => {
                                                     {value.nombre}
                                                     </td>
                                                     <td>
+                                                        {value.apellido}
+                                                    </td>
+                                                    <td>
                                                     {value.email}
                                                     </td>
                                                     <td>
@@ -219,6 +232,7 @@ const MaestroUsuario = () => {
                                                         set_id_update(value._id);
                                                         set_idUsers_update(value.idUsers);
                                                         set_nombre_update(value.nombre);
+                                                        set_apellido_update(value.apellido);
                                                         set_email_update(value.email);
                                                         set_password_update(value.password);
                                                         set_rol_update(value.rol);
@@ -226,6 +240,7 @@ const MaestroUsuario = () => {
 
                                                         document.getElementById('idUsers_update').defaultValue=value.idUsers;
                                                         document.getElementById('nombre_update').defaultValue=value.nombre;
+                                                        document.getElementById('apellido_update').defaultValue=value.apellido;
                                                         document.getElementById('email_update').defaultValue=value.email;
                                                         document.getElementById('password_update').defaultValue=value.password;
                                                         document.getElementById('rol_update').defaultValue=value.rol;
@@ -264,6 +279,15 @@ const MaestroUsuario = () => {
                                                     <Form.Control id='nombre_update' type="text" placeholder=" Ingrese el nombre del usuario" onChange = {
                                                     (e) =>{
                                                         set_nombre_update(e.target.value);
+                                                    }
+                                                    } required/>            
+                                                </Form.Group>
+
+                                                <Form.Group as={Col}  className="mb-3" controlId="formBasicApellido">
+                                                    <Form.Label>Apellido Usuario</Form.Label>
+                                                    <Form.Control id='apellido_update' type="text" placeholder=" Ingrese el apellido del usuario" onChange = {
+                                                    (e) =>{
+                                                        set_apellido_update(e.target.value);
                                                     }
                                                     } required/>            
                                                 </Form.Group>

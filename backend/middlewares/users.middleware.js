@@ -7,6 +7,7 @@ verifyTypes = (req, res, next) => {
         _id:     joi.optional(),
         idUsers: joi.number().required(),
         nombre:  joi.string().required(),
+        apellido:joi.string().required(),
         email:   joi.string().required(),
         password:joi.string().required(),
         rol:     joi.string().required(),

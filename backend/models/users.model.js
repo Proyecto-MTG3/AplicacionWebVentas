@@ -12,6 +12,11 @@ const users_schema = new mongoose.Schema ({
         required: true,
         min: 1
     },
+    apellido: {
+        type: String,
+        required: true,
+        min: 1
+    },
     email: {
         type: String,
         required: true,
