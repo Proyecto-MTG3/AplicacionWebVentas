@@ -23,7 +23,7 @@ const MaestroUsuario = () => {
     const [email_add, set_email_add] = useState("");
     const [password_add, set_password_add] = useState("");
     const [rol_add, set_rol_add] = useState("");
-    const [state_add, set_state_add] = useState("true");
+    const [state_add, set_state_add] = useState("Pendiente");
   
     const [idUsers_update, set_idUsers_update] = useState(0);
     const [nombre_update, set_nombre_update] =  useState("");
