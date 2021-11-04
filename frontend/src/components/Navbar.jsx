@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <div className="sb-topnav navbar navbar-expand-lg- navbar-dark bg-dark">
             {/* Navbar Brand */}
-            <div className="navbar-brand ps-3" ><center><h3>M.T.I.G3</h3></center></div>
+            <div className="navbar-brand ps-3" ><center><h3>MTG3</h3></center></div>
             {/* Sidebar Toggle */}
               <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
                 <i className="fas fa-bars"></i>

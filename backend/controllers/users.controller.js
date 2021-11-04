@@ -1,7 +1,7 @@
 //importamos el modelo para la BD
 const{users_model} = require('../models')
 
-//funcion que retornara el listado de prod de la BD
+//funcion que retornara el listado de usarios de la BD
 getAllUsers = (req, res)=> {
     users_model.find().exec((error, users) => {
         if(error)return res.status(500).json({error: true, mensaje: error});
@@ -10,7 +10,7 @@ getAllUsers = (req, res)=> {
     });
 }
 
-
+//Funcion que permite ingresar un nuevo usuario al listado de usuarios de la BD
 addUsers = (req, res) => {
     const users_new = new users_model(req.body);
     users_new.save((error, users) => {

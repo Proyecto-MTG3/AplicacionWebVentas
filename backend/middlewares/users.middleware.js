@@ -1,9 +1,13 @@
 const{users_model} = require('../models');
 const joi = require('@hapi/joi');
 
+
+//verificcamos que el usuario no tenga el mismo Id
 verifyTypes = (req, res, next) => {
-    const users_joi = joi.object({
-        
+
+    
+    const users_joi = joi.object({                     //se crea la estructura que debe cumplir los datos que son 
+                                                       //enviados desde el frontend 
         _id:     joi.optional(),
         idUsers: joi.number().required(),
         nombre:  joi.string().required(),
@@ -27,6 +31,9 @@ verifyidUsers = (req, res, next) => {
         next ();
     });
 }
+
+
+
 
 module.exports = Object.freeze ({
     verifyTypes,

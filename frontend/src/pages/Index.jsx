@@ -1,19 +1,69 @@
 import React from "react";
 import 'styles/styles.css';
-import Google from '../img/googleLogo.png';
-import {Link} from "react-router-dom";
-import AuthLayout from "layouts/AuthLayout";
+//import Google from '../img/googleLogo.png';
+//import {Link} from "react-router-dom";
+//import AuthLayout from "layouts/AuthLayout";
 import 'react-bootstrap';
 import 'bootstrap';
-
+import GoogleLogin from "react-google-login";
 
 
 
 function Index() {
 
+  function responseGoogle(response) {
+    if(response && response.tokenId) {
+      console.log(response);
+
+         fetch('http://localhost:3001/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                token: response.tokenId,
+                email: response.profileObj.email,
+                nombres: response.profileObj.givenName,
+                apellidos: response.profileObj.familyName
+            })
+        }).catch((err)=>console.error(err))
+        .then((respuesta)=>respuesta.json())
+        .then((respuestaServidor)=>{
+            console.log(respuestaServidor);
+             localStorage.setItem('token', response.tokenId);
+            localStorage.setItem('usuario', JSON.stringify(respuestaServidor.usuario));
+            window.location.href = '/admin/MenuPrincipal';  
+        }); 
+    }
+} 
+
+return (
+    <div>
+    <center>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+        <h1>Login</h1>
+        <GoogleLogin
+            clientId="789011637624-7i7mvke7ke6rer0pc7e7f8dgha94igno.apps.googleusercontent.com"               
+            buttonText = "Acceder con Google"
+
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+        />
+        </center>
+    </div>
+)
+
+
+
+
+
 
    
-  return (
+/*   return (
 
     <div className="bg-primary">
       <div id="layoutAuthentication">
@@ -49,11 +99,10 @@ function Index() {
                     <div className="card-footer text-center py-3">
                       <div className="small"><Link to="aut/Register">Crear una nueva cuenta</Link></div>
                     </div>
-                      <div className="card-footer text-center py-3 d-grid gap-2">                       
-                        <button className="btn btn-" type="button">
-                        <img src={Google} alt='Logo Google' className='small' />
-                            <span className='mx-4'>Continúa con Google</span></button>                           
-                      </div>                                
+                    
+
+
+                             
                   </div>
                 </div>
               </div>
@@ -63,7 +112,7 @@ function Index() {
         <AuthLayout />
       </div>
     </div>
-  );
+  ); */
 }
 
 export default Index;
