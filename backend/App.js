@@ -41,7 +41,7 @@ app.post('/login', async (req, res) => {
                 succes: true,
                 message:'El token es valido'
             });
-          userModel.users_add({
+          users.model.users_add({
             email: req.body.email,
             nombres: req.body.nombres,
             apellidos: req.body.apellidos,

@@ -245,9 +245,8 @@ const MaestroUsuario = () => {
                                                         document.getElementById('password_update').defaultValue=value.password;
                                                         document.getElementById('rol_update').defaultValue=value.rol;
                                                         
-                                                        }}
-                                                        >Editar
-                                                        </Button>                                                       
+                                                        }}>Editar
+                                                    </Button>                                                       
                                                     </td>
                                                     </Tooltip>
                                                     <Tooltip  title= "Eliminar usuario" arrow placement='right-start' >

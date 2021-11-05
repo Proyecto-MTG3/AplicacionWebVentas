@@ -1,8 +1,8 @@
 import React from "react";
 import 'styles/styles.css';
 //import Google from '../img/googleLogo.png';
-//import {Link} from "react-router-dom";
-//import AuthLayout from "layouts/AuthLayout";
+import {Link} from "react-router-dom";
+import AuthLayout from "layouts/AuthLayout";
 import 'react-bootstrap';
 import 'bootstrap';
 import GoogleLogin from "react-google-login";
@@ -37,33 +37,8 @@ function Index() {
     }
 } 
 
-return (
-    <div>
-    <center>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-        <h1>Login</h1>
-        <GoogleLogin
-            clientId="789011637624-7i7mvke7ke6rer0pc7e7f8dgha94igno.apps.googleusercontent.com"               
-            buttonText = "Acceder con Google"
-
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-        />
-        </center>
-    </div>
-)
-
-
-
-
-
-
    
-/*   return (
+   return (
 
     <div className="bg-primary">
       <div id="layoutAuthentication">
@@ -99,10 +74,24 @@ return (
                     <div className="card-footer text-center py-3">
                       <div className="small"><Link to="aut/Register">Crear una nueva cuenta</Link></div>
                     </div>
-                    
 
-
-                             
+                    <div>
+                      <center>
+                          
+                          <GoogleLogin
+                              clientId="789011637624-7i7mvke7ke6rer0pc7e7f8dgha94igno.apps.googleusercontent.com"                                            
+                                buttonText = "Acceder con Google"
+                                //render={renderProps => (
+                                  //<button onClick={renderProps.onClick} disabled={renderProps.disabled}>Acceder con Google</button>
+                                //)}
+                              
+                              onSuccess={responseGoogle}
+                              onFailure={responseGoogle}
+                              cookiePolicy={'single_host_origin'}
+                          />
+                          </center>
+                      </div>
+                      <br/>                            
                   </div>
                 </div>
               </div>
@@ -112,7 +101,7 @@ return (
         <AuthLayout />
       </div>
     </div>
-  ); */
+  ); 
 }
 
 export default Index;

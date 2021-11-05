@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
+import {Tooltip} from '@material-ui/core';
 
 
 
@@ -151,41 +152,43 @@ const MaestroVentas = () => {
                                                         <td>
                                                             {value.state.toString()}
                                                         </td>
-                                                        <td>
+                                                        <Tooltip title=" Editar Venta"> 
+                                                        <td>                                                        
                                                             <Button  type="button" className="btn btn-secondary"  onClick={
                                                                 () => {
-                                                                    set_id_update(value._id);
-                                                                    set_idSales_update(value.idSales)
-                                                                    set_idProduct_update(value.idProduct)
-                                                                    set_description_update(value.description);
-                                                                    set_cantidad_update(value.cantidad)
-                                                                    set_unit_cost_update(value.unit_cost);
-                                                                    set_total_cost_update(value.total_cost);
-                                                                    set_fecha_update(value.fecha);
-                                                                    set_idUsers_update(value.idUsers);
-                                                                    set_nombreCliente_update(value.set_nombreCliente);
-                                                                    set_nombreVendedor_update(value.nombreVendedor)
-                                                                    set_state_update(value.state.toString());
+                                                                set_id_update(value._id);
+                                                                set_idSales_update(value.idSales)
+                                                                set_idProduct_update(value.idProduct)
+                                                                set_description_update(value.description);
+                                                                set_cantidad_update(value.cantidad)
+                                                                set_unit_cost_update(value.unit_cost);
+                                                                set_total_cost_update(value.total_cost);
+                                                                set_fecha_update(value.fecha);
+                                                                set_idUsers_update(value.idUsers);
+                                                                set_nombreCliente_update(value.set_nombreCliente);
+                                                                set_nombreVendedor_update(value.nombreVendedor)
+                                                                set_state_update(value.state.toString());
 
+                                                                document.getElementById('idSales_update').defaultValue = value.idSales;
+                                                                document.getElementById('idProduct_update').defaultValue = value.idProduct;
+                                                                document.getElementById('description_update').defaultValue = value.description;
+                                                                document.getElementById('cantidad_update').defaultValue = value.cantidad;
+                                                                document.getElementById('unit_cost_update').defaultValue = value.unit_cost;
+                                                                document.getElementById('total_cost_update').defaultValue = value.total_cost;
+                                                                document.getElementById('fecha_update').defaultValue = value.fecha;
+                                                                document.getElementById('idUsers_update').defaultValue = value.idUsers;
+                                                                document.getElementById('nombreCliente_update').defaultValue = value.nombreCliente;
+                                                                document.getElementById('nombreVendedor_update').defaultValue = value.nombreVendedor;
 
-                                                                    document.getElementById('idSales_update').defaultValue = value.idSales;
-                                                                    document.getElementById('idProduct_update').defaultValue = value.idProduct;
-                                                                    document.getElementById('description_update').defaultValue = value.description;
-                                                                    document.getElementById('cantidad_update').defaultValue = value.cantidad;
-                                                                    document.getElementById('unit_cost_update').defaultValue = value.unit_cost;
-                                                                    document.getElementById('total_cost_update').defaultValue = value.total_cost;
-                                                                    document.getElementById('fecha_update').defaultValue = value.fecha;
-                                                                    document.getElementById('idUsers_update').defaultValue = value.idUsers;
-                                                                    document.getElementById('nombreCliente_update').defaultValue = value.nombreCliente;
-                                                                    document.getElementById('nombreVendedor_update').defaultValue = value.nombreVendedor;
-
-                                                                }}
-                                                            >Editar
+                                                                }}>Editar
                                                             </Button>
                                                         </td>
+                                                        </Tooltip>
+                                                        <Tooltip  title= "Eliminar Venta" arrow placement='right-start' >
                                                         <td>
-                                                            <Button  type="button" className="btn btn-secondary"  onClick={() => delete_sales(value._id)}> Eliminar</Button>
+                                                            <Button  type="submit" className="btn btn-secondary"  onClick={() => delete_sales(value._id)}> Eliminar</Button>
                                                         </td>
+                                                        </Tooltip>  
                                                     </tr>
                                                 )
                                             }

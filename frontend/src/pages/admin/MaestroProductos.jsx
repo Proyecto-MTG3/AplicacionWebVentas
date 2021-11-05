@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
-
+import {Tooltip} from '@material-ui/core';
 
 
 function MaestroProductos() {
@@ -103,26 +103,29 @@ function MaestroProductos() {
                                                             <td>
                                                                 {value.state.toString()}
                                                             </td>
+                                                            <Tooltip title=" Editar Producto"> 
                                                             <td>
                                                                 <Button type="button" className="btn btn-secondary" onClick={
                                                                     () => {
-                                                                        set_id_update(value._id);
-                                                                        set_idProduct_update(value.idProduct);
-                                                                        set_description_update(value.description);
-                                                                        set_unit_cost_update(value.unit_cost);
-                                                                        set_state_update(value.state.toString());
+                                                                    set_id_update(value._id);
+                                                                    set_idProduct_update(value.idProduct);
+                                                                    set_description_update(value.description);
+                                                                    set_unit_cost_update(value.unit_cost);
+                                                                    set_state_update(value.state.toString());
 
-                                                                        document.getElementById('idProduct_update').defaultValue = value.idProduct;
-                                                                        document.getElementById('description_update').defaultValue = value.description;
-                                                                        document.getElementById('unit_cost_update').defaultValue = value.unit_cost;
+                                                                    document.getElementById('idProduct_update').defaultValue = value.idProduct;
+                                                                    document.getElementById('description_update').defaultValue = value.description;
+                                                                    document.getElementById('unit_cost_update').defaultValue = value.unit_cost;
 
-                                                                    }}
-                                                                >Editar
+                                                                    }}>Editar
                                                                 </Button>
                                                             </td>
+                                                            </Tooltip>
+                                                            <Tooltip  title= "Eliminar Venta" arrow placement='right-start' >
                                                             <td>
                                                                 <Button type="button" className="btn btn-secondary" onClick={() => delete_product(value._id)}> Eliminar</Button>
                                                             </td>
+                                                            </Tooltip> 
                                                         </tr>
                                                     )
                                                 }

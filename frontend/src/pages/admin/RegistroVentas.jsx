@@ -179,7 +179,7 @@ const RegistroVentas = () => {
                                                             type="radio"
                                                             id='0'
                                                             onChange={(e) => {
-                                                                set_state_add("Entregao");
+                                                                set_state_add("Entregado");
                                                             }} />
 
                                                         <Form.Check
