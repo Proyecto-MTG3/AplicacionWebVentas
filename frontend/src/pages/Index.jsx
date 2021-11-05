@@ -1,6 +1,5 @@
 import React from "react";
 import 'styles/styles.css';
-//import Google from '../img/googleLogo.png';
 import {Link} from "react-router-dom";
 import AuthLayout from "layouts/AuthLayout";
 import 'react-bootstrap';
@@ -14,28 +13,10 @@ function Index() {
   function responseGoogle(response) {
     if(response && response.tokenId) {
       console.log(response);
+      window.location.href = '/admin/MenuPrincipal'; 
 
-         fetch('http://localhost:3001/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                token: response.tokenId,
-                email: response.profileObj.email,
-                nombres: response.profileObj.givenName,
-                apellidos: response.profileObj.familyName
-            })
-        }).catch((err)=>console.error(err))
-        .then((respuesta)=>respuesta.json())
-        .then((respuestaServidor)=>{
-            console.log(respuestaServidor);
-             localStorage.setItem('token', response.tokenId);
-            localStorage.setItem('usuario', JSON.stringify(respuestaServidor.usuario));
-            window.location.href = '/admin/MenuPrincipal';  
-        }); 
     }
-} 
+}  
 
    
    return (
