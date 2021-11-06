@@ -30,7 +30,7 @@ const{sales_routes} = require ('./routers');
 const{users_routes} = require ('./routers');
 const auth = require('registry-auth-token');
 
-//uso de las rutas
+//uso de las rutas                                              
 app.use('/api/v1/product',product_routes);
 app.use('/api/v1/sales',sales_routes);
 app.use('/api/v1/users/',users_routes);

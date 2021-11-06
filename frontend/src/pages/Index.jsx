@@ -54,13 +54,14 @@ function Index() {
                     </div>
                     <div className="card-footer text-center py-3">
                       <div className="small"><Link to="aut/Register">Crear una nueva cuenta</Link></div>
+                      <center>_______________o_______________</center>
                     </div>
-
+                    
                     <div>
                       <center>
                           
                           <GoogleLogin
-                              clientId="789011637624-7i7mvke7ke6rer0pc7e7f8dgha94igno.apps.googleusercontent.com"                                            
+                              clientId='789011637624-7i7mvke7ke6rer0pc7e7f8dgha94igno.apps.googleusercontent.com'                                        
                                 buttonText = "Acceder con Google"
                                 //render={renderProps => (
                                   //<button onClick={renderProps.onClick} disabled={renderProps.disabled}>Acceder con Google</button>
