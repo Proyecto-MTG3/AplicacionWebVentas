@@ -125,10 +125,12 @@ function MaestroProductos() {
                                                             <td>
                                                                 <Button type="button" className="btn btn-secondary" onClick={() => delete_product(value._id)}> Eliminar</Button>
                                                             </td>
-                                                            </Tooltip> 
+                                                            </Tooltip>
+                                                            <ToastContainer position="top-center" autoClose={3000} /> 
                                                         </tr>
                                                     )
                                                 }
+                                                
                                             </tbody>
                                         </Table>
                                         <hr />

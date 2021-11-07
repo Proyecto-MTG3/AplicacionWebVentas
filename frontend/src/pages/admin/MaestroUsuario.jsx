@@ -253,7 +253,8 @@ const MaestroUsuario = () => {
                                                     <td>
                                                     <Button type="button" className="btn btn-secondary" onClick={() => delete_users(value._id)}> Eliminar</Button>
                                                     </td> 
-                                                    </Tooltip>                                                                                                         
+                                                    </Tooltip>
+                                                    <ToastContainer position="top-center" autoClose={1000} />                                                                                                         
                                                     </tr>
                                                 )
                                                 }

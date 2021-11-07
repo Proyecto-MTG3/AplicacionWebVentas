@@ -188,7 +188,8 @@ const MaestroVentas = () => {
                                                         <td>
                                                             <Button  type="submit" className="btn btn-secondary"  onClick={() => delete_sales(value._id)}> Eliminar</Button>
                                                         </td>
-                                                        </Tooltip>  
+                                                        </Tooltip>
+                                                        <ToastContainer position="top-center" autoClose={1000} />  
                                                     </tr>
                                                 )
                                             }
